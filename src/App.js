@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import StudentDetails from './StudentDetails';
+import AddStudent from './AddStudent';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+  const [showform, setShowform] = useState(false);
+  console.log(showform);
+  function Form() {
+    return (
+      <div className="App">
+        <AddStudent setShowForm={setShowform} />
+        <button className="btn btn-danger m-4" onClick={() => setShowform(false)}>Cancel</button>
+      </div>
+    );
+  }
+
+  function Table() {
+    return (
+      <div className="App">
+        <button onClick={() => setShowform(true)}>Add New</button>
+        <StudentDetails />
+      </div>
+    );
+  }
+  return <div>{showform ? <Form /> : <Table />}</div>;
 }
-
-export default App;
